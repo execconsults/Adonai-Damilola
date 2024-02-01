@@ -101,7 +101,6 @@ app.use(flash())
  
 app.get('/atom.xml', async (req, res) => {
    try {
-     const baseUrl = 'https://uniquweb.com'; // Update with your website's base URL
      const currentDate = new Date().toISOString();
  
      // Generate the sitemap XML dynamically
@@ -129,6 +128,36 @@ app.get('/atom.xml', async (req, res) => {
      res.status(500).send('Internal Server Error');
    }
  });
+
+app.post('/contact',(req,res)=>{
+   const body = req.body
+     // Send an email to the user
+  const transporter = nodemailer.createTransport({
+   service: 'gmail', // e.g., 'Gmail' or use your email service
+   auth: {
+     user: 'earnitzreward@gmail.com',
+     pass: 'omcl virw sryw wpuy',
+   },
+ });
+
+ const mailOptions = {
+   from: 'zlivehe55@email.com',
+   to: body.email, // Assuming user.email is the recipient's email address
+   subject: 'New Contact Info',
+   text: ``,
+ };
+
+ transporter.sendMail(mailOptions, (error, info) => {
+   if (error) {
+     console.error('Error sending email: ' + error);
+   } else {
+     console.log('Email sent: ' + info.response);
+   }
+ });
+
+   console.log(body)
+
+})
 
 
 
